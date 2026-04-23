@@ -1,0 +1,42 @@
+pipeline {
+    agent {
+        node {
+            label 'slave1'
+        }
+    }
+    tools {
+        maven 'MyMaven'
+    }
+
+    stages {
+        stage('Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/navyasrigondela45/CI-CD-Pipeline-with-Jenkins-Slave-Node-Nexus-Integration.git'
+            }
+        }
+         stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+          stage('Artifact') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'github-server', classifier: '', file: 'target/github-server-1.2.war', type: 'war']], credentialsId: 'NEXUS_CRED', groupId: 'com.devops', nexusUrl: '16.16.141.204:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'myrepo', version: '1.2'
+               }
+        }
+         stage('Deploy') {
+            steps {
+                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'Tomcat_CRED', path: '', url: 'http://16.170.165.21:8080/')], contextPath: 'MyProfile', war: 'target/*.war'
+            }
+        }
+    }
+    
+    post {
+     
+        always {
+            mail to: 'navyasrigondela45@gmail.com',
+            subject: "Build Status: ${currentBuild.fullDisplayName}",
+            body: "The build ${env.BUILD_NUMBER} finished with status: ${currentBuild.currentResult}. View logs at: ${env.BUILD_URL}"
+        }
+    }
+}
