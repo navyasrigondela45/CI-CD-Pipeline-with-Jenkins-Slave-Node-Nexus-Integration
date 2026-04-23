@@ -57,12 +57,16 @@ This pipeline automates the process of:
   
 - Successful Build Console Output
   <img width="1907" height="681" alt="image" src="https://github.com/user-attachments/assets/0d6cee0a-d93c-4213-97db-80c0234ab89d" />
+  <img width="1919" height="946" alt="image" src="https://github.com/user-attachments/assets/c5f35151-271d-4c03-ab25-0ee4552a29d6" />
 
 - Tomcat hosted application
-  
-  
+  <img width="1919" height="728" alt="image" src="https://github.com/user-attachments/assets/7e4adabc-302c-4303-bd4c-5abfcea57c8e" />
+
 - Nexus Artifact Upload
+  <img width="1205" height="588" alt="image" src="https://github.com/user-attachments/assets/8b11c474-15f3-4942-9eff-ba87daef349d" />
+
 - Email Notifications (Success/Failure)
+  <img width="1484" height="564" alt="image" src="https://github.com/user-attachments/assets/fff75a23-f093-43ea-9136-24c956a3d203" />
 
 ---
 
@@ -72,6 +76,7 @@ This pipeline automates the process of:
 .
 ├── Jenkinsfile
 ├── pom.xml
+├── Pipeline_script
 ├── src/
 └── README.md
 ```
